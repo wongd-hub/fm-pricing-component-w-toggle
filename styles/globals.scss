@@ -36,7 +36,7 @@ a {
     position: fixed;
     bottom: 0;
     left: 0;
-    z-index: -1;
+    z-index: 1;
     width: 100%;
     height: 100vh;
     background-image: url('../public/static/bg-bottom.svg');
@@ -45,7 +45,7 @@ a {
   }
   &-top {
     position: fixed;
-    z-index: -1;
+    z-index: 1;
     top: 0;
     right: 0;
     width: 100%;
@@ -76,7 +76,7 @@ a {
   width: 100%;
   height: 100vh;
   background-color: var(--v-light-grayish-blue);
-  z-index: -5;
+  z-index: 0;
 }
 
 .site-title {
@@ -89,6 +89,7 @@ $unfocused-percent: 0.9;
 
 .cards {
   position: relative;
+  z-index: 3;
   display: grid;
   grid-template-columns: 1fr fit-content(330px) 1fr;
   height: fit-content;
@@ -223,6 +224,8 @@ $switch-height: 35;
   background: linear-gradient(var(--color-1), var(--color-2));
   justify-content: flex-start;
   transition: opacity 0.5s ease;
+  position: relative;
+  z-index: 3;
 
   &:hover {
     opacity: 0.7;
