@@ -18,8 +18,8 @@ This is a solution to the [Pricing component with toggle challenge on Frontend M
 
 ### Links
 
-- Solution URL: [GitHub](https://your-solution-url.com)
-- Live Site URL: [Vercel](https://your-live-site-url.com)
+- Solution URL: [GitHub](https://github.com/wongd-hub/fm-pricing-component-w-toggle)
+- Live Site URL: [Vercel](https://fm-pricing-component-w-toggle.vercel.app/)
 
 ## My process
 ### Built with
@@ -35,5 +35,5 @@ This is a solution to the [Pricing component with toggle challenge on Frontend M
 
 ## Author
 
-- Website - [GitHub](https://www.your-site.com)
+- Website - [GitHub](https://github.com/wongd-hub/)
 - Frontend Mentor - [@wongd-hub](https://www.frontendmentor.io/profile/wongd-hub)
