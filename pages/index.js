@@ -6,7 +6,7 @@ import Notification from '../components/Notification'
 var _ = require('lodash')
 
 const variants = {
-  monthly: { x: 50 }, // Should match '$switch-height' in globals.scss
+  monthly: { x: 35 }, // Should match '$switch-height' in globals.scss
   annually: { x: 0  }
 }
 

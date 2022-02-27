@@ -53,6 +53,7 @@ a {
     background-image: url('../public/static/bg-top.svg');
     background-repeat: no-repeat;
     background-position: right top;
+    background-color: var(--v-light-grayish-blue);
   }
 }
 
@@ -208,7 +209,7 @@ $unfocused-percent: 0.9;
 }
 
 /* Switch */
-$switch-height: 50;
+$switch-height: 35;
 
 .switch {
   width: calc(2px * $switch-height);
@@ -238,7 +239,7 @@ $switch-height: 50;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2rem auto;
+  margin: 3rem auto;
   
   & > * {
     margin: 0 1rem;
