@@ -26,7 +26,7 @@ This is a solution to the [Pricing component with toggle challenge on Frontend M
 
 - [React](https://reactjs.org/) - JS library
 - [Next.js](https://nextjs.org/) - React framework
-- [Framer Motion](https://styled-components.com/) - Animation library
+- [Framer Motion](https://www.framer.com/docs/) - Animation library
 
 ### Useful resources
 

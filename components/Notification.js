@@ -15,7 +15,7 @@ export default function Notification(props) {
             animate={props.isDisplayed ? 'open' : 'closed'}
         >
             Hello there! 👋<br/>
-            This site is currently not optimised for screen-sizes outside of 320-375px and >= 1030px wide
+            This site is currently not optimised for screen-sizes outside of 320-375px and &ge; 1030px wide
         </motion.div>
     )
 

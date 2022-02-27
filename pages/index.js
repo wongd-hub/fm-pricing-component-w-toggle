@@ -11,7 +11,7 @@ const variants = {
 }
 
 function checkScreen(width, setter) {
-  if (width <= 375 || width >= 1030) {
+  if ((width >= 320 && width <= 375) || width >= 1030) {
     setter(false);
   } else {
     setter(true);
