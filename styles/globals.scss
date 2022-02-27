@@ -34,6 +34,8 @@ a {
 .background {
   &-bottom {
     position: fixed;
+    bottom: 0;
+    left: 0;
     z-index: -1;
     width: 100%;
     height: 100vh;
@@ -44,6 +46,8 @@ a {
   &-top {
     position: fixed;
     z-index: -1;
+    top: 0;
+    right: 0;
     width: 100%;
     height: 100vh;
     background-image: url('../public/static/bg-top.svg');
@@ -52,18 +56,50 @@ a {
   }
 }
 
+@media only screen and (max-width: 375px) {
+  .background {
+    &-bottom {
+      display: none;
+    }
+    &-top {
+      background-size: 50%;
+    }
+  }
+}
+
 /* Site Specific */
 .main {
   display: flex;
   flex-direction: column;
   padding-top: 2rem;
-  padding-left: 4rem;
-  padding-right: 4rem;
+  width: 100%;
+  height: 100vh;
 }
 
+.site-title {
+  text-align: center;
+  font-size: calc(36rem / 16);
+}
+
+$focused-card-height: 485px;
+$unfocused-percent: 0.9;
+
 .cards {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr fit-content(330px) 1fr;
+  height: fit-content;
+  align-items: center;
+
+  &-title,
+  &-price {
+    text-align: center;
+  }
+  &-price {
+    font-size: calc(72rem / 16);
+    font-weight: 700;
+    margin: 1.5rem 0;
+  }
 
   & ul {
     list-style-type: none;
@@ -98,16 +134,76 @@ a {
   }
 
   &-unfocused {
+    position: relative;
+    z-index: 1;
     padding: 2rem;
     background-color: white;
-    border-radius: 20px;
     filter: drop-shadow(0px 0px 10px hsl(0, 0, 0));
-
-    
+    height: calc($unfocused-percent * $focused-card-height);
+    max-width: 330px;
   }
 
   &-focused {
+    position: relative;
+    z-index: 5;
+    height: $focused-card-height;
     padding: 2rem;
+    padding-top: calc(2rem + ((1 - $unfocused-percent)/2) * $focused-card-height);
+    background: linear-gradient(var(--color-1), var(--color-2));
+    border-radius: 10px;
+    filter: drop-shadow(0px 0px 10px hsl(0, 0, 0));
+    color: white;
+    width: 100%;
+  }
+
+  &-left {
+    display: flex;
+    justify-content: flex-end;
+
+    & > div {
+      border-radius: 10px 0 0 10px;
+    }
+  }
+
+  &-right {
+    display: flex;
+    justify-content: flex-start;
+
+    & > div {
+      border-radius: 0 10px 10px 0;
+    }
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .cards {
+    display: flex;
+    flex-direction: column;
+
+    &-unfocused {
+      filter: drop-shadow(0px 0px 10px hsl(0, 0, 0));
+      height: calc($unfocused-percent * $focused-card-height);
+      margin: 1.5rem 0;
+    }
+  
+    &-focused {
+      height: calc($unfocused-percent * $focused-card-height);
+      padding: 2rem;
+      max-width: 330px;
+      margin: 1.5rem 0;
+    }
+  
+    &-left {
+      & > div {
+        border-radius: 10px
+      }
+    }
+  
+    &-right {
+      & > div {
+        border-radius: 10px;
+      }
+    }
   }
 }
 
@@ -123,6 +219,11 @@ $switch-height: 50;
   cursor: pointer;
   background: linear-gradient(var(--color-1), var(--color-2));
   justify-content: flex-start;
+  transition: opacity 0.5s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
 }
 
 .switch div {
@@ -144,7 +245,65 @@ $switch-height: 50;
   }
 }
 
-.site-title {
-  text-align: center;
-  font-size: calc(36rem / 16);
+/* Button */
+button {
+  margin-top: 1rem;
+  width: 100%;
+  border: 0;
+  height: 40px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: calc(12rem / 16);
+  letter-spacing: calc(3rem / 16);
+}
+
+.button {
+  
+  &-secondary {
+    cursor: pointer;
+    color: white;
+    background: linear-gradient(var(--color-1), var(--color-2));
+    transition: all 0.5s ease;
+
+    &:hover {
+      background: transparent;
+      border: 1px var(--color-2) solid;
+      color: var(--color-2);
+    }
+
+    &:active {
+      opacity: 0.7;
+    }
+  }
+
+  &-primary {
+    cursor: pointer;
+    color: var(--color-2);
+    transition: all 0.5s ease;
+
+    &:hover {
+      background: transparent;
+      border: 1px white solid;
+      color: white;
+    }
+
+    &:active {
+      opacity: 0.3;
+    }
+  }
+}
+
+/* Notification */
+.notification {
+    border-radius: 10px;
+    background: linear-gradient(var(--color-1), var(--color-2));
+    color: white;
+    height: fit-content;
+    width: min(23rem, 80%);
+    position: fixed;
+    font-size: calc(14rem / 16);
+    padding: 1rem;
+    margin: 1rem;
+    right: 0;
 }

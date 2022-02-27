@@ -1,24 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
-import { motion} from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion' // Use AnimatePresence to animate the changing of price
+import Switch from '../components/Switch'
+import Notification from '../components/Notification'
+var _ = require('lodash')
 
 const variants = {
   monthly: { x: 50 }, // Should match '$switch-height' in globals.scss
   annually: { x: 0  }
 }
 
-function Switch({ freq, ...props }) {
-
-  return (
-    <motion.div animate className='switch' {...props}>
-      <motion.div animate={freq === 'monthly' ? 'monthly' : 'annually'} variants={variants} />
-    </motion.div>
-  );
+function checkScreen(width, setter) {
+  if (width <= 375 || width >= 1030) {
+    setter(false);
+  } else {
+    setter(true);
+  }
 }
 
 export default function Home() {
   const [freq, setFreq] = useState('annually')
+  const [unsupported, setUnsupp] = useState(undefined)
+
+  // Listen for window resize
+  useEffect(() => {
+    checkScreen(window.innerWidth, setUnsupp);
+    window.addEventListener(
+      "resize",
+      _.throttle(() => {
+        checkScreen(window.innerWidth, setUnsupp);
+      }, 500)
+    );
+  }, []);
 
   return (
     <div className='site-container'>
@@ -28,7 +41,7 @@ export default function Home() {
         <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png"/>
         <title>Frontend Mentor | Pricing component with toggle</title>
       </Head>
-
+      <Notification isDisplayed={unsupported} />
       <main className='main'>
         <div className="background-bottom"></div>
         <div className="background-top"></div>
@@ -38,12 +51,14 @@ export default function Home() {
           <div className="frequency-switch">
             <p>Annually</p>
               <Switch freq={freq} onClick={() => {
-                if (freq === 'monthly') {
-                  setFreq('annually')
-                } else {
-                  setFreq('monthly')
-                }
-              }} />
+                  if (freq === 'monthly') {
+                    setFreq('annually')
+                  } else {
+                    setFreq('monthly')
+                  }
+                }} 
+                variants={variants}
+              />
             <p>Monthly</p></div>
         </div>
 
@@ -51,7 +66,19 @@ export default function Home() {
           <div className="cards-left">
             <div className="cards-unfocused">
               <h2 className="cards-title">Basic</h2>
-              <p className="cards-price">{freq === 'monthly' ? '$19.99' : '$199.99'}</p>
+              <AnimatePresence>
+                <motion.p 
+                  className="cards-price"
+                  key={freq}
+                  initial={{ opacity: 0, y: -20, position: 'absolute' }}
+                  animate={{ opacity: 1, y: 0, position: 'relative' }}
+                  exit={{ opacity: 0, y: 20, position: 'absolute' }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {freq === 'monthly' ? '$19.99' : '$199.99'}
+                </motion.p>
+              </AnimatePresence>
+             
               <ul>
                 <li>500 GB Storage</li>
                 <li>2 Users Allowed</li>
@@ -64,7 +91,18 @@ export default function Home() {
           <div className="cards-mid">
             <div className="cards-focused">
               <h2 className="cards-title">Professional</h2>
-              <p className="cards-price">{freq === 'monthly' ? '$24.99' : '$249.99'}</p>
+              <AnimatePresence>
+                <motion.p 
+                  className="cards-price"
+                  key={freq}
+                  initial={{ opacity: 0, y: -20, position: 'absolute' }}
+                  animate={{ opacity: 1, y: 0, position: 'relative' }}
+                  exit={{ opacity: 0, y: 20, position: 'absolute' }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {freq === 'monthly' ? '$24.99' : '$249.99'}
+                </motion.p>
+              </AnimatePresence>
               <ul>
                 <li>1 TB Storage</li>
                 <li>5 Users Allowed</li>
@@ -77,7 +115,18 @@ export default function Home() {
           <div className="cards-right">
             <div className="cards-unfocused">
               <h2 className="cards-title">Master</h2>
-              <p className="cards-price">{freq === 'monthly' ? '$39.99' : '$399.99'}</p>
+              <AnimatePresence>
+                <motion.p 
+                  className="cards-price"
+                  key={freq}
+                  initial={{ opacity: 0, y: -20, position: 'absolute' }}
+                  animate={{ opacity: 1, y: 0, position: 'relative' }}
+                  exit={{ opacity: 0, y: 20, position: 'absolute' }}
+                  transition={{ duration: 0.5 }}
+                >
+                  {freq === 'monthly' ? '$39.99' : '$399.99'}
+                </motion.p>
+              </AnimatePresence>
               <ul>
                 <li>2 TB Storage</li>
                 <li>10 Users Allowed</li>
